@@ -3004,7 +3004,6 @@ body.light-mode .main-header.header-scrolled {
     width: min(94vw, 520px);
     max-height: 90vh;
     max-height: 90dvh;
-    display: flex;
     flex-direction: column;
     top: 50%;
     left: 50%;

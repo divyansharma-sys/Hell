@@ -269,8 +269,50 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 8. DETAILS FORM MODAL (Preserving addDetailsBtn, modal open/close, validation)
   // ==========================================================================
+  const REGISTERED_STORAGE_KEY = "hell_operative_registered";
+  const PROFILE_STORAGE_KEY = "hell_operative_profile";
+  const PROMPT_SEEN_KEY = "hell_register_prompt_seen";
+
+  function loadSavedOperativeProfile() {
+    try {
+      const data = localStorage.getItem(PROFILE_STORAGE_KEY);
+      if (data) {
+        return JSON.parse(data);
+      }
+    } catch (e) {
+      console.warn("Could not load saved operative profile:", e);
+    }
+    return null;
+  }
+
+  function prefillOperativeForm() {
+    const profile = loadSavedOperativeProfile();
+    if (profile) {
+      if (nameInput && profile.name) nameInput.value = profile.name;
+      if (phoneInput && profile.phone) phoneInput.value = profile.phone;
+      if (addressInput && profile.address) addressInput.value = profile.address;
+      if (cityInput && profile.city) cityInput.value = profile.city;
+      if (pincodeInput && profile.pincode) pincodeInput.value = profile.pincode;
+    }
+  }
+
+  function updateOperativeUIState() {
+    const isRegistered = localStorage.getItem(REGISTERED_STORAGE_KEY) === "true";
+    if (isRegistered) {
+      if (addDetailsBtn) {
+        const textSpan = addDetailsBtn.querySelector("span:not(.material-symbols-outlined)");
+        if (textSpan) textSpan.textContent = "Profile Active";
+      }
+      if (mAddDetailsBtn) {
+        const textSpan = mAddDetailsBtn.querySelector("span:not(.material-symbols-outlined)");
+        if (textSpan) textSpan.textContent = "PROFILE ACTIVE";
+      }
+    }
+  }
+
   function openDetailsModal() {
     if (detailsForm && overlay) {
+      prefillOperativeForm();
       detailsForm.style.display = "flex";
       overlay.style.display = "block";
       clearErrors();
@@ -282,6 +324,10 @@ document.addEventListener("DOMContentLoaded", () => {
       detailsForm.style.display = "none";
       overlay.style.display = "none";
     }
+    // Dismissing or closing marks the prompt as seen so refreshing never pops it up again
+    try {
+      localStorage.setItem(PROMPT_SEEN_KEY, "true");
+    } catch (e) {}
   }
 
   if (addDetailsBtn) {
@@ -352,20 +398,58 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (isValid) {
+        // Save to localStorage so refreshing will NEVER show the register modal again
+        const profilePayload = {
+          name,
+          phone,
+          address,
+          city,
+          pincode,
+          registered: true,
+          registeredAt: new Date().toISOString()
+        };
+
+        try {
+          localStorage.setItem(REGISTERED_STORAGE_KEY, "true");
+          localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profilePayload));
+          localStorage.setItem(PROMPT_SEEN_KEY, "true");
+        } catch (e) {
+          console.warn("Could not save operative registration to localStorage:", e);
+        }
+
+        updateOperativeUIState();
         showPopup("Operative profile & address registered successfully!", "success");
+
         setTimeout(() => {
           closeDetailsModalHandler();
-          if (nameInput) nameInput.value = "";
-          if (phoneInput) phoneInput.value = "";
-          if (addressInput) addressInput.value = "";
-          if (cityInput) cityInput.value = "";
-          if (pincodeInput) pincodeInput.value = "";
         }, 600);
       } else {
         showPopup("Please resolve required manifest fields.", "error");
       }
     });
   }
+
+  // One-time modal prompt for new operatives:
+  // Opens ONLY ONE TIME for visitors who have NEVER registered and have NOT seen the prompt.
+  // Once registered or dismissed, it will NEVER show again on page refresh.
+  const hasOperativeRegistered = localStorage.getItem(REGISTERED_STORAGE_KEY) === "true";
+  const hasSeenRegisterPrompt = localStorage.getItem(PROMPT_SEEN_KEY) === "true";
+
+  if (!hasOperativeRegistered && !hasSeenRegisterPrompt) {
+    setTimeout(() => {
+      const nowReg = localStorage.getItem(REGISTERED_STORAGE_KEY) === "true";
+      const nowSeen = localStorage.getItem(PROMPT_SEEN_KEY) === "true";
+      if (!nowReg && !nowSeen) {
+        try {
+          localStorage.setItem(PROMPT_SEEN_KEY, "true");
+        } catch (e) {}
+        openDetailsModal();
+      }
+    }, 2200);
+  }
+
+  // Initialize UI button state on page load
+  updateOperativeUIState();
 
   // ==========================================================================
   // 9. CRATE BUILDER & PACK SELECTION (Stitch Feature)
