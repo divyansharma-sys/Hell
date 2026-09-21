@@ -723,26 +723,18 @@ document.addEventListener("DOMContentLoaded", () => {
         targetTiltY = 0;
       });
 
-      // Responsive touch/pointer drag controls without trapping page scroll
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let isHorizontalDrag = false;
-
+      // Dedicated 3D Can Drag Rotation (Interacting with the can rotates only the can without moving the background page)
       canvas.addEventListener("pointerdown", (e) => {
         isDragging = true;
         previousPointerX = e.clientX;
         previousPointerY = e.clientY;
-        touchStartX = e.clientX;
-        touchStartY = e.clientY;
-        isHorizontalDrag = false;
         dragVelocityX = 0;
         dragVelocityY = 0;
         lastInteractionTime = Date.now();
 
-        // Only capture pointer for mouse; on touch allow natural gesture recognition
-        if (e.pointerType === "mouse") {
-          try { canvas.setPointerCapture(e.pointerId); } catch(_) {}
-        }
+        try {
+          canvas.setPointerCapture(e.pointerId);
+        } catch (_) {}
       });
 
       canvas.addEventListener("pointermove", (e) => {
@@ -751,27 +743,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const deltaX = e.clientX - previousPointerX;
         const deltaY = e.clientY - previousPointerY;
 
-        if (e.pointerType === "touch") {
-          const totalX = Math.abs(e.clientX - touchStartX);
-          const totalY = Math.abs(e.clientY - touchStartY);
+        dragVelocityX = deltaX * 0.01;
+        dragVelocityY = deltaY * 0.007;
 
-          // If user is predominantly scrolling vertically, release drag to let page scroll
-          if (!isHorizontalDrag && totalY > totalX + 6) {
-            isDragging = false;
-            return;
-          }
-
-          if (totalX > totalY + 6) {
-            isHorizontalDrag = true;
-          }
-        }
-
-        dragVelocityX = deltaX * 0.008;
-        dragVelocityY = deltaY * 0.006;
-
+        // Smooth 3D rotation: spin horizontally 360 and tilt vertically
         canGroup.rotation.y += dragVelocityX;
-        // Keep x-rotation bounded so the can stays upright
-        canGroup.rotation.x = Math.max(-0.6, Math.min(0.6, canGroup.rotation.x + dragVelocityY));
+        canGroup.rotation.x = Math.max(-0.75, Math.min(0.75, canGroup.rotation.x + dragVelocityY));
 
         previousPointerX = e.clientX;
         previousPointerY = e.clientY;
@@ -781,8 +758,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const onPointerUp = (e) => {
         if (isDragging) {
           isDragging = false;
-          isHorizontalDrag = false;
-          try { canvas.releasePointerCapture(e.pointerId); } catch(_) {}
+          try {
+            canvas.releasePointerCapture(e.pointerId);
+          } catch (_) {}
         }
       };
 

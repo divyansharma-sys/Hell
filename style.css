@@ -1116,7 +1116,7 @@ body.light-mode .hero-video-overlay {
   width: 340px;
   height: 540px;
   user-select: none;
-  touch-action: pan-y;
+  touch-action: none; /* Prevents page scroll when touching and interacting with the 3D can */
 }
 
 .can-3d-canvas {
@@ -1125,7 +1125,7 @@ body.light-mode .hero-video-overlay {
   display: block;
   cursor: grab;
   outline: none;
-  touch-action: pan-y;
+  touch-action: none; /* Allows free 3D rotation without moving the background page */
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(255, 30, 39, 0.5));
   transition: transform 0.15s ease-out;
 }
@@ -2870,11 +2870,11 @@ body.light-mode .main-header.header-scrolled {
     width: min(280px, 80vw);
     height: 400px;
     margin: 0 auto;
-    touch-action: pan-y;
+    touch-action: none;
   }
 
   .can-3d-canvas {
-    touch-action: pan-y;
+    touch-action: none;
   }
 
   .concentric-ring.ring-1 {
