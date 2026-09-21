@@ -72,9 +72,65 @@
               <span class="material-symbols-outlined">bolt</span>
               <span>ORDER NOW</span>
             </button>
+
+            <!-- Mobile Hamburger Toggle Button -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Toggle navigation menu" title="Menu">
+              <span class="material-symbols-outlined menu-icon-open">menu</span>
+              <span class="material-symbols-outlined menu-icon-close">close</span>
+            </button>
           </div>
         </div>
       </header>
+
+      <!-- Mobile Off-Canvas Navigation Drawer & Backdrop -->
+      <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+      <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+        <div class="mobile-drawer-header">
+          <div class="mobile-drawer-brand">
+            <span class="material-symbols-outlined devil-logo">local_fire_department</span>
+            <span class="brand-name">HELL <span class="accent-red">ENERGY</span></span>
+          </div>
+          <button class="mobile-drawer-close" id="mobileDrawerClose" type="button" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="mobile-drawer-links">
+          <button id="mHomeBtn" class="m-nav-link active" type="button">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+          </button>
+          <button id="mAboutBtn" class="m-nav-link" type="button">
+            <span class="material-symbols-outlined">reviews</span>
+            <span>Reviews &amp; Reports</span>
+          </button>
+          <button id="mServicesBtn" class="m-nav-link" type="button">
+            <span class="material-symbols-outlined">sports_esports</span>
+            <span>Combat Zones</span>
+          </button>
+          <button id="mCrateBtn" class="m-nav-link" type="button">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>Crate Builder</span>
+          </button>
+          <button id="mMatrixBtn" class="m-nav-link" type="button">
+            <span class="material-symbols-outlined">biotech</span>
+            <span>Telemetry HUD</span>
+          </button>
+          <button id="mContactBtn" class="m-nav-link" type="button">
+            <span class="material-symbols-outlined">mail</span>
+            <span>Contact &amp; Comms</span>
+          </button>
+        </div>
+        <div class="mobile-drawer-actions">
+          <button id="mAddDetailsBtn" class="cta-secondary-btn m-details-btn" type="button">
+            <span class="material-symbols-outlined">assignment_ind</span>
+            <span>OPERATIVE PROFILE</span>
+          </button>
+          <a href="checkout.html" class="cta-primary-btn m-checkout-btn">
+            <span class="material-symbols-outlined">bolt</span>
+            <span>DISPATCH CHECKOUT</span>
+          </a>
+        </div>
+      </nav>
 
       <main class="page-content">
         <!-- HERO SECTION -->

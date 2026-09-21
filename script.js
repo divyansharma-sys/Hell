@@ -59,6 +59,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileBarPrice = document.getElementById("mobileBarPrice");
   const mobileAddCrateBtn = document.getElementById("mobileAddCrateBtn");
 
+  // Elements - Mobile Navigation Drawer
+  const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+  const mobileNavDrawer = document.getElementById("mobileNavDrawer");
+  const mobileDrawerOverlay = document.getElementById("mobileDrawerOverlay");
+  const mobileDrawerClose = document.getElementById("mobileDrawerClose");
+  const mHomeBtn = document.getElementById("mHomeBtn");
+  const mAboutBtn = document.getElementById("mAboutBtn");
+  const mServicesBtn = document.getElementById("mServicesBtn");
+  const mCrateBtn = document.getElementById("mCrateBtn");
+  const mMatrixBtn = document.getElementById("mMatrixBtn");
+  const mContactBtn = document.getElementById("mContactBtn");
+  const mAddDetailsBtn = document.getElementById("mAddDetailsBtn");
+
   // Hero interactive buttons
   const heroOrderBtn = document.getElementById("heroOrderBtn");
   const exploreMatrixBtn = document.getElementById("exploreMatrixBtn");
@@ -179,6 +192,67 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ==========================================================================
+  // 7b. MOBILE NAVIGATION DRAWER CONTROLLER
+  // ==========================================================================
+  function openMobileDrawer() {
+    if (mobileNavDrawer) mobileNavDrawer.classList.add("active");
+    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add("active");
+    if (mobileMenuToggle) mobileMenuToggle.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMobileDrawer() {
+    if (mobileNavDrawer) mobileNavDrawer.classList.remove("active");
+    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove("active");
+    if (mobileMenuToggle) mobileMenuToggle.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener("click", () => {
+      if (mobileNavDrawer && mobileNavDrawer.classList.contains("active")) {
+        closeMobileDrawer();
+      } else {
+        openMobileDrawer();
+      }
+    });
+  }
+
+  if (mobileDrawerClose) {
+    mobileDrawerClose.addEventListener("click", closeMobileDrawer);
+  }
+
+  if (mobileDrawerOverlay) {
+    mobileDrawerOverlay.addEventListener("click", closeMobileDrawer);
+  }
+
+  // Mobile drawer links mapping
+  const mNavMappings = [
+    { btn: mHomeBtn, sec: homeSection },
+    { btn: mAboutBtn, sec: aboutSection },
+    { btn: mServicesBtn, sec: servicesSection },
+    { btn: mCrateBtn, sec: crateSection },
+    { btn: mMatrixBtn, sec: powerMatrixSection },
+    { btn: mContactBtn, sec: contactSection }
+  ];
+
+  mNavMappings.forEach(({ btn, sec }) => {
+    if (btn && sec) {
+      btn.addEventListener("click", () => {
+        closeMobileDrawer();
+        sec.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+  });
+
+  if (mAddDetailsBtn) {
+    mAddDetailsBtn.addEventListener("click", () => {
+      closeMobileDrawer();
+      openDetailsModal();
+    });
+  }
+
   // Hero Quick Actions
   if (heroOrderBtn && crateSection) {
     heroOrderBtn.addEventListener("click", () => {
@@ -197,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   function openDetailsModal() {
     if (detailsForm && overlay) {
-      detailsForm.style.display = "block";
+      detailsForm.style.display = "flex";
       overlay.style.display = "block";
       clearErrors();
     }
@@ -649,27 +723,55 @@ document.addEventListener("DOMContentLoaded", () => {
         targetTiltY = 0;
       });
 
-      // Pointer Drag Controls
+      // Responsive touch/pointer drag controls without trapping page scroll
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isHorizontalDrag = false;
+
       canvas.addEventListener("pointerdown", (e) => {
         isDragging = true;
         previousPointerX = e.clientX;
         previousPointerY = e.clientY;
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+        isHorizontalDrag = false;
         dragVelocityX = 0;
         dragVelocityY = 0;
         lastInteractionTime = Date.now();
-        canvas.setPointerCapture(e.pointerId);
+
+        // Only capture pointer for mouse; on touch allow natural gesture recognition
+        if (e.pointerType === "mouse") {
+          try { canvas.setPointerCapture(e.pointerId); } catch(_) {}
+        }
       });
 
       canvas.addEventListener("pointermove", (e) => {
         if (!isDragging) return;
+
         const deltaX = e.clientX - previousPointerX;
         const deltaY = e.clientY - previousPointerY;
+
+        if (e.pointerType === "touch") {
+          const totalX = Math.abs(e.clientX - touchStartX);
+          const totalY = Math.abs(e.clientY - touchStartY);
+
+          // If user is predominantly scrolling vertically, release drag to let page scroll
+          if (!isHorizontalDrag && totalY > totalX + 6) {
+            isDragging = false;
+            return;
+          }
+
+          if (totalX > totalY + 6) {
+            isHorizontalDrag = true;
+          }
+        }
 
         dragVelocityX = deltaX * 0.008;
         dragVelocityY = deltaY * 0.006;
 
         canGroup.rotation.y += dragVelocityX;
-        canGroup.rotation.x += dragVelocityY;
+        // Keep x-rotation bounded so the can stays upright
+        canGroup.rotation.x = Math.max(-0.6, Math.min(0.6, canGroup.rotation.x + dragVelocityY));
 
         previousPointerX = e.clientX;
         previousPointerY = e.clientY;
@@ -679,6 +781,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const onPointerUp = (e) => {
         if (isDragging) {
           isDragging = false;
+          isHorizontalDrag = false;
           try { canvas.releasePointerCapture(e.pointerId); } catch(_) {}
         }
       };
@@ -744,6 +847,60 @@ document.addEventListener("DOMContentLoaded", () => {
       console.warn("3D WebGL initialization fallback:", err);
       if (fallbackImg) fallbackImg.style.display = "block";
     }
+  }
+
+  // ==========================================================================
+  // 10. SCROLL SPY & HEADER ELEVATION
+  // ==========================================================================
+  const mainHeader = document.querySelector(".main-header");
+  window.addEventListener("scroll", () => {
+    if (mainHeader) {
+      if (window.scrollY > 20) {
+        mainHeader.classList.add("header-scrolled");
+      } else {
+        mainHeader.classList.remove("header-scrolled");
+      }
+    }
+  }, { passive: true });
+
+  const spySections = [
+    { id: "homeSection", btnId: "homeBtn", mBtnId: "mHomeBtn" },
+    { id: "powerMatrixSection", btnId: null, mBtnId: "mMatrixBtn" },
+    { id: "servicesSection", btnId: "servicesBtn", mBtnId: "mServicesBtn" },
+    { id: "crateSection", btnId: null, mBtnId: "mCrateBtn" },
+    { id: "aboutSection", btnId: "aboutBtn", mBtnId: "mAboutBtn" },
+    { id: "contactSection", btnId: "contactBtn", mBtnId: "mContactBtn" }
+  ];
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const config = spySections.find((s) => s.id === entry.target.id);
+          if (config) {
+            document.querySelectorAll(".nav-link").forEach((btn) => btn.classList.remove("active"));
+            document.querySelectorAll(".m-nav-link").forEach((btn) => btn.classList.remove("active"));
+
+            if (config.btnId) {
+              const el = document.getElementById(config.btnId);
+              if (el) el.classList.add("active");
+            }
+            if (config.mBtnId) {
+              const el = document.getElementById(config.mBtnId);
+              if (el) el.classList.add("active");
+            }
+          }
+        }
+      });
+    }, {
+      rootMargin: "-25% 0px -55% 0px",
+      threshold: 0
+    });
+
+    spySections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
   }
 
   // Initialize 3D can
