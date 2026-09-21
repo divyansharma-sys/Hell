@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HELL ENERGY // Crate Dispatch Terminal</title>
+    <!-- Fonts: Anton for heavy headlines, Chivo for precision HUD typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+
+  <body class="carbon-mesh">
+    <!-- TopNavBar (Shared Component) -->
+    <header class="checkout-header">
+      <div class="checkout-header-inner">
+        <!-- Brand & Status Halo -->
+        <div class="brand-halo">
+          <a class="brand-link" href="index.html" title="Return to Store">
+            <span class="brand-title-lg">HELL ENERGY</span>
+          </a>
+          <div class="dispatch-node-badge">
+            <span class="node-pulse-dot"></span>
+            <span class="node-text">DISPATCH NODE #04 ACTIVE</span>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="header-nav">
+          <a href="index.html#homeSection">ENERGY DRINKS</a>
+          <a href="index.html#servicesSection">COMBAT ZONES</a>
+          <a href="index.html#crateSection" class="active">CRATE BUILDER</a>
+          <a href="index.html#aboutSection">ATHLETES</a>
+          <a href="index.html#powerMatrixSection">LAB TELEMETRY</a>
+        </nav>
+
+        <!-- Trailing Actions Cluster -->
+        <div class="header-cluster">
+          <!-- Audio Trigger -->
+          <button class="icon-trigger-btn" type="button" id="audioToggleBtn" title="Volume Telemetry">
+            <span class="material-symbols-outlined">volume_up</span>
+          </button>
+
+          <!-- Cart Preview Capsule -->
+          <a class="cart-capsule" href="#manifestColumn" title="View Crate">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <div class="capsule-data">
+              <span class="capsule-lbl" id="headerCrateLabel">1 CRATE</span>
+              <span class="capsule-price" id="headerCratePrice">$29.99</span>
+            </div>
+            <span class="capsule-badge" id="headerCrateBadge">1</span>
+          </a>
+
+          <!-- Return to Store / Rapid Order CTA -->
+          <a href="index.html#crateSection" class="rapid-order-btn">
+            ← RETURN TO STORE
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Canvas Content -->
+    <main class="checkout-main-content">
+      <div class="checkout-container">
+        <!-- Sub-Bar Security Indicators -->
+        <div class="security-sub-bar">
+          <div class="security-left">
+            <span class="material-symbols-outlined">lock</span>
+            <span class="security-primary-txt">MIL-SPEC SSL 256-BIT ENCRYPTION ACTIVE</span>
+            <span class="security-divider">|</span>
+            <span class="security-sub-txt">SHA-512 SECURE LOGISTICS PROTOCOL</span>
+          </div>
+          <div class="security-right">
+            <div class="badge-indicator">
+              <span class="dot-green"></span>
+              <span>COLD-CHAIN VERIFIED</span>
+            </div>
+            <div class="badge-indicator">
+              <span class="dot-red"></span>
+              <span>SAME-DAY DISPATCH QUEUE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-Step Checkout Progress HUD -->
+        <div class="checkout-stepper-hud">
+          <div class="laser-border-top"></div>
+          <div class="stepper-grid">
+            <!-- Step 1: Payload -->
+            <a href="index.html#crateSection" class="step-card completed-step" style="text-decoration: none;">
+              <div class="step-num-box">
+                <span class="material-symbols-outlined" style="font-size: 16px;">check</span>
+              </div>
+              <div>
+                <p class="step-lbl-top">STEP 01</p>
+                <p class="step-lbl-title">OPERATIONAL PAYLOAD</p>
+              </div>
+            </a>
+
+            <!-- Step 2: Active Coordinates -->
+            <div class="step-card active-step">
+              <div class="step-num-box">02</div>
+              <div>
+                <div class="step-lbl-top">
+                  <span>ACTIVE TARGET</span>
+                  <span class="active-pulse-mini"></span>
+                </div>
+                <p class="step-lbl-title">DISPATCH COORDINATES</p>
+              </div>
+            </div>
+
+            <!-- Step 3: Payment Matrix -->
+            <div class="step-card disabled-step">
+              <div class="step-num-box">03</div>
+              <div>
+                <p class="step-lbl-top">STEP 03</p>
+                <p class="step-lbl-title">PAYMENT MATRIX</p>
+              </div>
+            </div>
+
+            <!-- Step 4: Live Telemetry Radar -->
+            <div class="step-card disabled-step">
+              <div class="step-num-box">04</div>
+              <div>
+                <p class="step-lbl-top">STEP 04</p>
+                <p class="step-lbl-title">LIVE CRATE RADAR</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Two-Column Layout -->
+        <div class="checkout-layout-grid">
+          <!-- LEFT COLUMN: Forms & Payment Terminal -->
+          <div class="checkout-forms-column">
+            <!-- 1. Dispatch Vector Coordinates -->
+            <section class="checkout-section-box">
+              <div class="section-box-header">
+                <div class="section-box-title-group">
+                  <span class="diamond-red"></span>
+                  <h2 class="section-title">DISPATCH VECTOR COORDINATES</h2>
+                </div>
+                <span class="section-badge-pill">GPS SYNC</span>
+              </div>
+
+              <form id="dispatchCoordinatesForm" onsubmit="event.preventDefault();">
+                <div class="form-grid-2">
+                  <div class="form-field-wrapper">
+                    <label for="opName">RECIPIENT OPERATIVE NAME</label>
+                    <div class="checkout-input-box">
+                      <input type="text" id="opName" placeholder="Enter operative name" required />
+                    </div>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label for="opEmail">TELEMETRY DISPATCH EMAIL</label>
+                    <div class="checkout-input-box">
+                      <input type="email" id="opEmail" placeholder="Enter operative email" required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-field-wrapper">
+                  <label for="opAddress">TACTICAL DISPATCH STREET ADDRESS</label>
+                  <div class="checkout-input-box">
+                    <input type="text" id="opAddress" placeholder="Street address, building, or delivery bay" required />
+                    <span class="material-symbols-outlined trailing-icon">navigation</span>
+                  </div>
+                </div>
+
+                <div class="form-grid-3">
+                  <div class="form-field-wrapper">
+                    <label for="opSuite">BAY / SUITE / LEVEL</label>
+                    <div class="checkout-input-box">
+                      <input type="text" id="opSuite" placeholder="Apt, Suite, Unit (optional)" />
+                    </div>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label for="opCity">CITY / HUB</label>
+                    <div class="checkout-input-box">
+                      <input type="text" id="opCity" placeholder="City / Hub" required />
+                    </div>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label for="opPostal">POSTAL / SECTOR CODE</label>
+                    <div class="checkout-input-box">
+                      <input type="text" id="opPostal" placeholder="Postal / Sector Code" required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-field-wrapper">
+                  <label for="opPhone">COMMLINK / MOBILE PHONE FOR COURIER SMS</label>
+                  <div class="checkout-input-box">
+                    <input type="tel" id="opPhone" placeholder="+1 (555) 000-0000" required />
+                  </div>
+                </div>
+              </form>
+            </section>
+
+            <!-- 2. Priority Freight Dispatch Selector -->
+            <section class="checkout-section-box">
+              <div class="section-box-header">
+                <div class="section-box-title-group">
+                  <span class="diamond-red"></span>
+                  <h2 class="section-title">DISPATCH CARGO VELOCITY</h2>
+                </div>
+                <span class="section-badge-muted">COLD INTEGRITY GUARANTEED</span>
+              </div>
+
+              <div class="shipping-velocity-list">
+                <!-- Option 1: Standard Ground -->
+                <div class="velocity-option-card selected" id="optStandardShipping">
+                  <div class="velocity-left">
+                    <div class="velocity-radio-circle"></div>
+                    <div>
+                      <div class="velocity-title-row">
+                        <span class="velocity-name">STANDARD ARMORY COURIER</span>
+                        <span class="velocity-badge-rec">RECOMMENDED</span>
+                      </div>
+                      <p class="velocity-desc">2-3 Business Days Ground Delivery. Heavy insulated armor crate box included.</p>
+                    </div>
+                  </div>
+                  <div class="velocity-price-box">
+                    <span class="velocity-price">FREE</span>
+                    <p class="velocity-cond">ORDERS &gt; $25</p>
+                  </div>
+                </div>
+
+                <!-- Option 2: Rapid Nitro Air -->
+                <div class="velocity-option-card" id="optRapidShipping">
+                  <div class="velocity-left">
+                    <div class="velocity-radio-circle"></div>
+                    <div>
+                      <div class="velocity-title-row">
+                        <span class="velocity-name">RAPID NITRO AIR CARGO</span>
+                        <span class="velocity-badge-ice">SUB-ZERO ICE PACKS</span>
+                      </div>
+                      <p class="velocity-desc">Next-Morning Dispatch by 10:00 AM with dry-ice cryo pack stabilization.</p>
+                    </div>
+                  </div>
+                  <div class="velocity-price-box">
+                    <span class="velocity-price subdue">+$8.99</span>
+                    <p class="velocity-cond" style="color: var(--secondary-light);">AIR PRIORITY</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. Secure Payment Terminal -->
+            <section class="checkout-section-box">
+              <div class="section-box-header">
+                <div class="section-box-title-group">
+                  <span class="diamond-red"></span>
+                  <h2 class="section-title">SECURE PAYMENT TERMINAL</h2>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.35rem; color: #10b981; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">verified_user</span>
+                  <span>TOKENIZED VAULT</span>
+                </div>
+              </div>
+
+              <!-- Payment Mode Tabs -->
+              <div class="payment-tabs-grid">
+                <button class="pay-tab-btn active" id="tabCreditCard" type="button">
+                  <span class="material-symbols-outlined">credit_card</span>
+                  <span>CREDIT CARD</span>
+                </button>
+                <button class="pay-tab-btn" id="tabAppleGoogle" type="button">
+                  <span class="material-symbols-outlined">bolt</span>
+                  <span>APPLE / GOOGLE</span>
+                </button>
+                <button class="pay-tab-btn" id="tabSolana" type="button">
+                  <span class="material-symbols-outlined">currency_bitcoin</span>
+                  <span>SOLANA PAY</span>
+                </button>
+              </div>
+
+              <!-- Credit Card Fields -->
+              <div id="creditCardPanel" class="space-y-fields">
+                <div class="form-field-wrapper">
+                  <label for="cardNumberInput">CARD NUMBER</label>
+                  <div class="checkout-input-box">
+                    <input type="text" id="cardNumberInput" placeholder="•••• •••• •••• ••••" maxlength="19" autocomplete="cc-number" />
+                    <span class="card-brand-tag">VISA</span>
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-field-wrapper">
+                    <label for="cardExpiryInput">EXPIRATION (MM/YY)</label>
+                    <div class="checkout-input-box">
+                      <input type="text" id="cardExpiryInput" placeholder="MM / YY" maxlength="7" autocomplete="cc-exp" />
+                    </div>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label for="cardCvcInput">SECURITY TELEMETRY CVC</label>
+                    <div class="checkout-input-box">
+                      <input type="password" id="cardCvcInput" placeholder="CVC" maxlength="4" autocomplete="cc-csc" />
+                      <span class="material-symbols-outlined trailing-icon" style="color: var(--text-muted);">help</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Apple / Google Pay Alternate Panel -->
+              <div id="appleGooglePanel" style="display: none; padding: 1.5rem 0; text-align: center;">
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem;">
+                  One-tap encrypted biometric checkout enabled for Safari &amp; Chrome operatives.
+                </p>
+                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #000; border: 1px solid #333; padding: 0.75rem 2rem; border-radius: 6px; font-weight: 800;">
+                  <span class="material-symbols-outlined">fingerprint</span>
+                  <span>BIOMETRIC TAP READY</span>
+                </div>
+              </div>
+
+              <!-- Solana Web3 Alternate Panel -->
+              <div id="solanaPanel" style="display: none; padding: 1.5rem 0; text-align: center;">
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem;">
+                  Solana Pay instant QR settlement (USDC or SOL). Zero transaction lag.
+                </p>
+                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(153,69,255,0.15); border: 1px solid #9945FF; color: #DC1FFF; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 800;">
+                  <span class="material-symbols-outlined">qr_code_2</span>
+                  <span>CONNECT PHANTOM / SOLFLARE</span>
+                </div>
+              </div>
+
+              <!-- Age Verification & Telemetry Disclaimers -->
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem; margin-top: 1rem;">
+                <label class="checkbox-item-row">
+                  <input type="checkbox" id="ageConsentCheck" checked />
+                  <span class="checkbox-text">
+                    <strong>OPERATIVE AGE CONFIRMATION (18+):</strong> I certify that I am at least 18 years old and acknowledge the extreme caffeine payload (32mg/100ml) per can.
+                  </span>
+                </label>
+                <label class="checkbox-item-row">
+                  <input type="checkbox" id="saveVaultCheck" checked />
+                  <span class="checkbox-text">
+                    Save payment parameters encrypted in my VIP Access Vault for subsequent one-click restocks.
+                  </span>
+                </label>
+              </div>
+
+              <!-- Authorize Button -->
+              <button type="button" class="authorize-dispatch-btn" id="authorizeDispatchBtn">
+                <span class="material-symbols-outlined" style="font-size: 28px;">lock</span>
+                <span id="btnChargeText">AUTHORIZE DISPATCH &amp; CHARGE $29.99</span>
+              </button>
+              <p class="mission-directive-note">
+                BY CLICKING AUTHORIZE, YOU EXECUTE DISPATCH MISSION DIRECTIVE #771-KFT
+              </p>
+            </section>
+          </div>
+
+          <!-- RIGHT COLUMN: Sticky Order Manifest -->
+          <div class="manifest-sticky-wrapper" id="manifestColumn">
+            <div class="manifest-card">
+              <div class="manifest-glow-aura"></div>
+              <div class="manifest-header">
+                <span class="manifest-tag-title">MANIFEST CRATE #01</span>
+                <span class="manifest-tag-cold">COLD STORAGE VERIFIED</span>
+              </div>
+
+              <!-- Product Item Details -->
+              <div class="manifest-product-row">
+                <div class="manifest-can-frame">
+                  <img src="assets/checkout_can.png" alt="HELL Energy Classic Can" id="manifestCanImg" />
+                  <span class="can-size-badge">250ml</span>
+                </div>
+                <div class="manifest-meta">
+                  <span class="manifest-sub-formula">ORIGINAL FORMULATION</span>
+                  <h3 class="manifest-product-name">HELL ENERGY CLASSIC</h3>
+                  <p class="manifest-pack-desc" id="manifestPackDesc">24-Can Tactical Party Tray • Tutti-Frutti</p>
+                  <div class="manifest-actions-row">
+                    <!-- Stepper -->
+                    <div class="manifest-stepper">
+                      <button class="stepper-arrow-btn" id="checkoutQtyMinus" type="button">-</button>
+                      <span class="stepper-val" id="checkoutQtyDisplay">1</span>
+                      <button class="stepper-arrow-btn" id="checkoutQtyPlus" type="button">+</button>
+                    </div>
+                    <!-- Price -->
+                    <div class="manifest-pricing-group">
+                      <span class="manifest-active-price" id="manifestPriceDisplay">$29.99</span>
+                      <span class="manifest-strikethrough" id="manifestBaseStrikethrough">$37.99</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tactical Perks Included Checklist -->
+              <div class="dispatch-perks-box">
+                <p class="perks-header-title">DISPATCH PERKS LOADED:</p>
+                <div class="perk-row">
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span>Free Thermal Refrigeration Insulated Packing</span>
+                </div>
+                <div class="perk-row">
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span>HELL Energy Holographic Die-Cut Sticker Kit</span>
+                </div>
+                <div class="perk-row">
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span>Priority Dispatch Tracked Telemetry</span>
+                </div>
+                <div class="perk-row">
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span>Zero-Spill Crush-Proof Armor Box</span>
+                </div>
+              </div>
+
+              <!-- Promo Code Protocol Input -->
+              <div class="promo-box">
+                <label for="promoCodeInput" class="promo-label">PROMO / SQUAD DISCOUNT PROTOCOL</label>
+                <div class="promo-input-cluster">
+                  <input type="text" id="promoCodeInput" placeholder="ENTER CODE (e.g. SQUAD20)" />
+                  <button type="button" class="promo-apply-btn" id="promoApplyBtn">APPLY</button>
+                </div>
+                <div id="promoFeedbackMsg" style="font-size: 0.72rem; font-weight: 700; margin-top: 0.4rem; display: none;"></div>
+              </div>
+
+              <!-- Detailed Financial Telemetry Breakdown -->
+              <div class="manifest-totals-box">
+                <div class="totals-line">
+                  <span id="subtotalPayloadLbl">Subtotal Payload (24 Cans)</span>
+                  <span class="totals-val" id="summaryPayloadSubtotal">$29.99</span>
+                </div>
+                <div class="totals-line">
+                  <span>Heavy Thermal Isolation Freight</span>
+                  <span class="totals-val green-free" id="summaryFreightCharge">FREE</span>
+                </div>
+                <div class="totals-line">
+                  <span>Telemetry Environmental Recycling Levy</span>
+                  <span class="totals-val">$0.00</span>
+                </div>
+                <div class="total-due-line">
+                  <div>
+                    <span class="total-due-label">TOTAL DUE</span>
+                    <p class="total-due-sub">ALL TAXES &amp; TELEMETRY INCLUDED</p>
+                  </div>
+                  <span class="total-due-amount" id="summaryFinalTotal">$29.99</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guarantee & Hotline Capsule -->
+            <div class="guarantee-capsule">
+              <div class="guarantee-icon-box">
+                <span class="material-symbols-outlined">shield</span>
+              </div>
+              <div>
+                <p class="guarantee-title">100% UNBROKEN CAN GUARANTEE</p>
+                <p class="guarantee-desc">Damaged in transit? Instant automated replacement dispatch without return friction.</p>
+              </div>
+            </div>
+
+            <!-- Active Dispatch Hotline Badge -->
+            <div class="hotline-capsule">
+              <div class="hotline-left">
+                <span class="material-symbols-outlined">support_agent</span>
+                <span>24/7 DISPATCH OPS DESK</span>
+              </div>
+              <span class="hotline-num">1-800-HELL-ENERGY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer (Shared Component) -->
+    <footer class="checkout-footer">
+      <div class="checkout-footer-inner">
+        <div class="footer-top-row">
+          <div>
+            <span class="footer-brand">HELL ENERGY</span>
+            <p class="footer-subline">GIVES YOU POWER LIKE HELL. PREMIUM CAFFEINE PERFORMANCE MATRICES.</p>
+          </div>
+          <div class="footer-badges">
+            <span class="footer-badge-pill">CERTIFIED COLD CHAIN</span>
+            <span class="footer-badge-pill" style="border-color: rgba(225,1,17,0.4);">ISO 22000 AUDITED</span>
+          </div>
+        </div>
+
+        <div class="footer-links-grid">
+          <a href="index.html#homeSection">GLOBAL DISTRIBUTION</a>
+          <a href="index.html#powerMatrixSection">LAB TEST PURITY SPECS</a>
+          <a href="index.html#crateSection">VIP ACCESS VAULT</a>
+          <a href="index.html#servicesSection">MOTORSPORT SPONSORSHIPS</a>
+          <a href="index.html#aboutSection">TERMS &amp; SAFETY DISCLOSURES</a>
+          <a href="index.html#contactSection">PRIVACY TELEMETRY</a>
+        </div>
+
+        <div class="footer-bottom-row">
+          <p>© 2025 HELL ENERGY PROMOTION KFT. ALL RIGHTS RESERVED. HIGH CAFFEINE CONTENT. NOT RECOMMENDED FOR CHILDREN OR PREGNANT WOMEN.</p>
+          <div class="footer-origin">
+            <span>FACTORY DIRECT DISPATCH</span>
+            <span>•</span>
+            <span>ORIGINAL HUNGARIAN POWER</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MISSION RADAR SUCCESS MODAL -->
+    <div class="mission-radar-modal" id="missionRadarModal">
+      <div class="mission-radar-card">
+        <div class="radar-sweep-circle">
+          <span class="material-symbols-outlined">radar</span>
+        </div>
+        <h2 class="radar-title">MISSION <span>AUTHORIZED</span></h2>
+        <p class="radar-desc">
+          Your crate dispatch directive has been committed to the tactical cold-chain logistics network. Armory drones are pre-cooling your payload.
+        </p>
+
+        <div class="radar-specs-box">
+          <div class="radar-spec-row">
+            <span class="radar-spec-lbl">DISPATCH TRACKING ID:</span>
+            <span class="radar-spec-val accent" id="modalTrackingId">#HL-8842-X9</span>
+          </div>
+          <div class="radar-spec-row">
+            <span class="radar-spec-lbl">OPERATIVE RECIPIENT:</span>
+            <span class="radar-spec-val" id="modalOperativeName">OPERATIVE RECIPIENT</span>
+          </div>
+          <div class="radar-spec-row">
+            <span class="radar-spec-lbl">PAYLOAD MANIFEST:</span>
+            <span class="radar-spec-val" id="modalPayloadName">24-Can Tactical Party Tray</span>
+          </div>
+          <div class="radar-spec-row">
+            <span class="radar-spec-lbl">SHIPPING VELOCITY:</span>
+            <span class="radar-spec-val" id="modalShippingVelocity">Standard Armory Courier (FREE)</span>
+          </div>
+          <div class="radar-spec-row">
+            <span class="radar-spec-lbl">TOTAL CHARGED:</span>
+            <span class="radar-spec-val accent" id="modalTotalCharged">$29.99</span>
+          </div>
+          <div class="radar-spec-row">
+            <span class="radar-spec-lbl">STATUS:</span>
+            <span class="radar-spec-val" style="color: #10b981;">DISPATCH IN PROGRESS</span>
+          </div>
+        </div>
+
+        <button type="button" class="radar-return-btn" id="modalReturnHomeBtn">
+          ← RETURN TO COMMAND DASHBOARD
+        </button>
+      </div>
+    </div>
+
+    <!-- Interactive Checkout Logic Script -->
+    <script src="checkout.js"></script>
+  </body>
+</html>

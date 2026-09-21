@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en" class="dark-mode">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HELL ENERGY // Unleash The Power Telemetry</title>
+    <!-- Fonts: Anton for heavy headlines, Chivo for precision HUD typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Three.js 3D WebGL Library for interactive 3D moving can -->
+    <script src="assets/three.min.js"></script>
+  </head>
+
+  <body class="dark-mode">
+    <!-- HOME PAGE -->
+    <div id="homePage">
+      <!-- TOP NAVIGATION BAR -->
+      <header class="main-header">
+        <div class="header-container">
+          <div class="brand-logo" id="headerBrand">
+            <span class="material-symbols-outlined devil-logo">local_fire_department</span>
+            <span class="brand-name">HELL <span class="accent-red">ENERGY</span></span>
+            <span class="telemetry-pill">LIVE 32mg</span>
+          </div>
+
+          <nav class="nav-links">
+            <button id="homeBtn" class="nav-link active" type="button">
+              <span class="material-symbols-outlined">home</span>
+              <span>Home</span>
+            </button>
+            <button id="aboutBtn" class="nav-link" type="button">
+              <span class="material-symbols-outlined">reviews</span>
+              <span>Reviews</span>
+            </button>
+            <button id="servicesBtn" class="nav-link" type="button">
+              <span class="material-symbols-outlined">sports_esports</span>
+              <span>Combat Zones</span>
+            </button>
+            <button id="contactBtn" class="nav-link" type="button">
+              <span class="material-symbols-outlined">mail</span>
+              <span>Contact</span>
+            </button>
+            <button id="addDetailsBtn" class="nav-link special-action" type="button">
+              <span class="material-symbols-outlined">assignment_ind</span>
+              <span>Add Details</span>
+            </button>
+          </nav>
+
+          <div class="header-actions">
+            <!-- Theme Toggle with preserved ID -->
+            <div class="theme-switch-wrapper" title="Toggle Theme">
+              <span class="material-symbols-outlined theme-icon light-icon">light_mode</span>
+              <label class="theme-toggle" for="themeToggle">
+                <input type="checkbox" id="themeToggle" checked />
+                <span class="slider"></span>
+              </label>
+              <span class="material-symbols-outlined theme-icon dark-icon">dark_mode</span>
+            </div>
+
+            <!-- Cart Indicator Badge -->
+            <button class="cart-pill-btn" id="cartBadgeBtn" type="button" title="View Crate">
+              <span class="material-symbols-outlined">shopping_cart</span>
+              <span class="cart-count" id="cartCountBadge">1</span>
+            </button>
+
+            <!-- Order Now Quick CTA -->
+            <button id="headerOrderBtn" class="cta-header-btn" type="button" title="Order Crate">
+              <span class="material-symbols-outlined">bolt</span>
+              <span>ORDER NOW</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <!-- HERO SECTION -->
+        <section id="homeSection" class="hero-section">
+          <!-- Ambient Background Video Container -->
+          <div class="hero-video-bg">
+            <video
+              id="heroBgVideo"
+              class="hero-video-element"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="public/videos/poster.png"
+            >
+              <source src="public/videos/energy-drink.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="hero-video-overlay"></div>
+          </div>
+
+          <div class="hero-bg-glow"></div>
+          <div class="hero-container">
+            <!-- Left Hero Content -->
+            <div class="hero-text-content">
+              <div class="hero-badge">
+                <span class="material-symbols-outlined">bolt</span>
+                <span>HELL ENERGY CLASSIC // DIRECT TELEMETRY</span>
+              </div>
+
+              <h1 class="hero-title">
+                UNLEASH <br />
+                <span class="gradient-text">THE POWER</span>
+              </h1>
+
+              <p class="hero-description">
+                Engineered with 32mg/100ml premium caffeine &amp; 5-vitamin complex for zero-slump focus, maximum combat stamina, and limitless overdrive. Double pasteurized with no preservatives.
+              </p>
+
+              <!-- Pill Badges -->
+              <div class="hero-pill-badges">
+                <div class="pill-badge">
+                  <span class="material-symbols-outlined">flash_on</span>
+                  <span>32 mg/100ml CAFFEINE</span>
+                </div>
+                <div class="pill-badge">
+                  <span class="material-symbols-outlined">medication</span>
+                  <span>5x B-VITAMINS</span>
+                </div>
+                <div class="pill-badge">
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span>NO PRESERVATIVES</span>
+                </div>
+              </div>
+
+              <!-- Price & Rating Row -->
+              <div class="hero-pricing-box">
+                <div class="price-details">
+                  <div class="main-price">$1.99</div>
+                  <div class="price-context">
+                    <span class="unit">/ 250ml CAN</span>
+                    <span class="status-in-stock">IN STOCK // ARMORED WAREHOUSE</span>
+                  </div>
+                </div>
+                <div class="hero-rating-box">
+                  <div class="stars">★★★★★</div>
+                  <span class="rating-text">4.9 ★ over 12.4k reviews</span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="hero-action-buttons">
+                <button class="cta-primary-btn big-hero-btn" id="heroOrderBtn" type="button">
+                  <span class="material-symbols-outlined">shopping_bag</span>
+                  <span>ORDER NOW - $1.99</span>
+                </button>
+                <button class="cta-secondary-btn" id="exploreMatrixBtn" type="button">
+                  <span class="material-symbols-outlined">radar</span>
+                  <span>VIEW TELEMETRY HUD</span>
+                </button>
+              </div>
+
+              <!-- Tactical Micro Banner -->
+              <div class="tactical-banner">
+                <span class="material-symbols-outlined">local_shipping</span>
+                <span>FREE TACTICAL DISPATCH ON CRATES OVER $40 // TEMPERATURE REGULATED</span>
+              </div>
+
+              <!-- Key HUD Stats -->
+              <div class="hero-stat-row">
+                <div class="hero-stat-card">
+                  <span class="stat-number">32<small>mg</small></span>
+                  <span class="stat-label">CAFFEINE / 100ML</span>
+                </div>
+                <div class="hero-stat-card">
+                  <span class="stat-number">5<small>x</small></span>
+                  <span class="stat-label">B-VITAMIN COMPLEX</span>
+                </div>
+                <div class="hero-stat-card">
+                  <span class="stat-number">0<small>g</small></span>
+                  <span class="stat-label">PRESERVATIVES</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Hero Visual Showcase -->
+            <div class="hero-visual-wrapper">
+              <div class="can-glow-aura"></div>
+              <div class="concentric-ring ring-1"></div>
+              <div class="concentric-ring ring-2"></div>
+
+              <div class="can-image-container" id="can3dContainer">
+                <!-- 3D Interactive WebGL Moving Can Canvas -->
+                <canvas id="can3dCanvas" class="can-3d-canvas"></canvas>
+
+                <!-- Interactive 3D Control Hint Badge -->
+                <div class="can-3d-hint" id="can3dHint" title="Click and drag to freely rotate in 3D">
+                  <span class="material-symbols-outlined rotate-3d-icon">3d_rotation</span>
+                  <span>3D CAN // DRAG TO ROTATE 360°</span>
+                </div>
+
+                <!-- Fallback image if WebGL is unavailable -->
+                <img src="assets/can_cutout.png" alt="HELL Energy Classic Can" class="hero-can-img fallback-can-img" id="heroCanImg" style="display: none;" />
+
+                <!-- HUD Telemetry Pointers matching Stitch -->
+                <div class="hud-pointer pointer-top-left">
+                  <div class="pointer-dot"></div>
+                  <div class="pointer-line"></div>
+                  <div class="pointer-card">
+                    <span class="pointer-tag">DOUBLE PASTEURISED // 32mg</span>
+                    <span class="pointer-desc">Continuous thermal stabilization for zero preservatives</span>
+                  </div>
+                </div>
+
+                <div class="hud-pointer pointer-top-right">
+                  <div class="pointer-dot"></div>
+                  <div class="pointer-line"></div>
+                  <div class="pointer-card">
+                    <span class="pointer-tag">5-VITAMIN BIO-MATRIX</span>
+                    <span class="pointer-desc">B3, B5, B6, B12 + Glucuronolactone cellular fuel</span>
+                  </div>
+                </div>
+
+                <div class="hud-pointer pointer-bottom-left">
+                  <div class="pointer-dot"></div>
+                  <div class="pointer-line"></div>
+                  <div class="pointer-card">
+                    <span class="pointer-tag">MICRO-PRESSURIZED CHARGE</span>
+                    <span class="pointer-desc">Dynamic fine bubble sparkle for instant refreshing taste</span>
+                  </div>
+                </div>
+
+                <div class="hud-pointer pointer-bottom-right">
+                  <div class="pointer-dot"></div>
+                  <div class="pointer-line"></div>
+                  <div class="pointer-card">
+                    <span class="pointer-tag">100% RECYCLABLE CAN</span>
+                    <span class="pointer-desc">Infinite circular lifecycle aluminum casing</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- POWER MATRIX HUD SECTION -->
+        <section id="powerMatrixSection" class="section-container power-matrix-section">
+          <div class="section-header-block">
+            <div class="section-tag">
+              <span class="material-symbols-outlined">biotech</span>
+              <span>TELEMETRY BREAKDOWN</span>
+            </div>
+            <h2 class="section-title">POWER MATRIX HUD</h2>
+            <p class="section-subtitle">
+              Biochemical breakdown and operational telemetry for high-demand cognitive workloads &amp; physical stress.
+            </p>
+          </div>
+
+          <div class="matrix-grid">
+            <div class="matrix-card">
+              <div class="card-hud-top">
+                <span class="matrix-code">SYS.01 // ENERGY DRIVE</span>
+                <span class="material-symbols-outlined card-icon">bolt</span>
+              </div>
+              <div class="matrix-metric-val">32<small>mg</small></div>
+              <div class="matrix-metric-title">Caffeine Activation / 100ml</div>
+              <p class="matrix-metric-desc">
+                Optimal clinical balance between rapid neural stimulation and sustained alertness without nervous tremors.
+              </p>
+              <div class="matrix-bar">
+                <div class="bar-fill" style="width: 85%"></div>
+              </div>
+              <div class="matrix-hud-footer">
+                <span>PEAK EFFICIENCY</span>
+                <span class="highlight">0.8h - 5.5h</span>
+              </div>
+            </div>
+
+            <div class="matrix-card">
+              <div class="card-hud-top">
+                <span class="matrix-code">SYS.02 // METABOLIC SHIELD</span>
+                <span class="material-symbols-outlined card-icon">medication</span>
+              </div>
+              <div class="matrix-metric-val">100<small>%</small></div>
+              <div class="matrix-metric-title">Metabolic B-Vitamin RDA</div>
+              <p class="matrix-metric-desc">
+                Full daily intake of B3 (Niacin), B5, B6, and B12 vitamins to accelerate carbohydrate metabolism and combat fatigue.
+              </p>
+              <div class="matrix-bar">
+                <div class="bar-fill" style="width: 100%"></div>
+              </div>
+              <div class="matrix-hud-footer">
+                <span>CELLULAR UPTAKE</span>
+                <span class="highlight">100% RDA</span>
+              </div>
+            </div>
+
+            <div class="matrix-card">
+              <div class="card-hud-top">
+                <span class="matrix-code">SYS.03 // FLAVOR PROFILE</span>
+                <span class="material-symbols-outlined card-icon">local_fire_department</span>
+              </div>
+              <div class="matrix-metric-val font-anton">TUTTI<small>-FRUTTI</small></div>
+              <div class="matrix-metric-title">Signature Punch Formula</div>
+              <p class="matrix-metric-desc">
+                Crisp, electrifying Tutti-Frutti profile with fine bubble micro-carbonation for instant crisp palate refreshment.
+              </p>
+              <div class="matrix-bar">
+                <div class="bar-fill" style="width: 92%"></div>
+              </div>
+              <div class="matrix-hud-footer">
+                <span>PALATE CRISPNESS</span>
+                <span class="highlight">9.8 / 10</span>
+              </div>
+            </div>
+
+            <div class="matrix-card">
+              <div class="card-hud-top">
+                <span class="matrix-code">SYS.04 // ECO ARMOR</span>
+                <span class="material-symbols-outlined card-icon">recycling</span>
+              </div>
+              <div class="matrix-metric-val">100<small>%</small></div>
+              <div class="matrix-metric-title">Recyclable Aluminum Can</div>
+              <p class="matrix-metric-desc">
+                High-grade aluminum shield preserves gas tension and cold thermal capacity while maintaining an infinite recycling loop.
+              </p>
+              <div class="matrix-bar">
+                <div class="bar-fill" style="width: 100%"></div>
+              </div>
+              <div class="matrix-hud-footer">
+                <span>CIRCULAR LIFECYCLE</span>
+                <span class="highlight">ZERO PLASTIC</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES / COMBAT ZONES SECTION (Preserving #servicesSection) -->
+        <section id="servicesSection" class="section-container combat-zones-section">
+          <div class="section-header-block">
+            <div class="section-tag">
+              <span class="material-symbols-outlined">target</span>
+              <span>SPECIALIZED APPLICATIONS</span>
+            </div>
+            <h2 class="section-title">CHOOSE YOUR COMBAT ZONE</h2>
+            <p class="section-subtitle">
+              Precision engineered high-frequency fuel customized for high-stake arenas and relentless missions.
+            </p>
+          </div>
+
+          <div class="combat-grid">
+            <div class="combat-card">
+              <div class="combat-icon-wrap">
+                <span class="material-symbols-outlined">sports_esports</span>
+              </div>
+              <span class="combat-zone-tag">ZONE 01 // DIGITAL ARENA</span>
+              <h3 class="combat-zone-title">ESPORTS &amp; CLUTCH GAMING</h3>
+              <p class="combat-zone-desc">
+                Microsecond clutch decision making, heightened APM reaction speed, and steady optic tracking under extreme ranked pressure without eye-twitch or muscle spasm.
+              </p>
+              <ul class="combat-features">
+                <li><span class="material-symbols-outlined">check</span> <span>Zero jitter hand stability</span></li>
+                <li><span class="material-symbols-outlined">check</span> <span>Extended scrim stamina</span></li>
+                <li><span class="material-symbols-outlined">check</span> <span>Faster auditory response</span></li>
+              </ul>
+              <button class="combat-card-btn" type="button" data-pack="6-pack">
+                <span>DEPLOY GAMING PACK</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </div>
+
+            <div class="combat-card highlighted-combat">
+              <div class="recommended-flag">MOST OPERATED</div>
+              <div class="combat-icon-wrap">
+                <span class="material-symbols-outlined">fitness_center</span>
+              </div>
+              <span class="combat-zone-tag">ZONE 02 // PHYSICAL POWER</span>
+              <h3 class="combat-zone-title">HEAVY GYM &amp; CROSSFIT</h3>
+              <p class="combat-zone-desc">
+                Boosted vascular dilation, increased work volume per set, lactic acid tolerance, and explosive power output for PR smashing training routines.
+              </p>
+              <ul class="combat-features">
+                <li><span class="material-symbols-outlined">check</span> <span>High output pump endurance</span></li>
+                <li><span class="material-symbols-outlined">check</span> <span>Intense mental focus in heavy reps</span></li>
+                <li><span class="material-symbols-outlined">check</span> <span>Fast intra-workout recovery</span></li>
+              </ul>
+              <button class="combat-card-btn highlight-btn" type="button" data-pack="24-pack">
+                <span>DEPLOY 24-CAN TRAY</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </div>
+
+            <div class="combat-card">
+              <div class="combat-icon-wrap">
+                <span class="material-symbols-outlined">dark_mode</span>
+              </div>
+              <span class="combat-zone-tag">ZONE 03 // COGNITIVE SHIFTS</span>
+              <h3 class="combat-zone-title">NIGHT OPERATIONS</h3>
+              <p class="combat-zone-desc">
+                Sustained nocturnal vigilance for coders, night shift operators, tactical drivers, and medical personnel navigating deep midnight shifts.
+              </p>
+              <ul class="combat-features">
+                <li><span class="material-symbols-outlined">check</span> <span>Overcomes 3:00 AM circadian slump</span></li>
+                <li><span class="material-symbols-outlined">check</span> <span>Sharp memory retention</span></li>
+                <li><span class="material-symbols-outlined">check</span> <span>Smooth metabolic taper</span></li>
+              </ul>
+              <button class="combat-card-btn" type="button" data-pack="single">
+                <span>DEPLOY NIGHT SPEC</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- BUILD YOUR CRATE / BUNDLE SELECTOR SECTION -->
+        <section id="crateSection" class="section-container crate-builder-section">
+          <div class="section-header-block">
+            <div class="section-tag">
+              <span class="material-symbols-outlined">inventory_2</span>
+              <span>LOGISTICS &amp; DEPLOYMENT</span>
+            </div>
+            <h2 class="section-title">BUILD YOUR CRATE</h2>
+            <p class="section-subtitle">
+              Select your operational payload. Delivered cold in heavy-duty armored carton packaging with express dispatch.
+            </p>
+          </div>
+
+          <div class="crate-layout-grid">
+            <!-- Left: Options Selector -->
+            <div class="pack-options-column">
+              <!-- Single Can -->
+              <div class="pack-option-card" data-pack="single" data-price="1.99" data-name="Single 250ml Can">
+                <div class="pack-radio">
+                  <div class="radio-circle"></div>
+                </div>
+                <div class="pack-details">
+                  <div class="pack-name-row">
+                    <span class="pack-title">Single 250ml Can</span>
+                    <span class="pack-tag">SAMPLE PROBE</span>
+                  </div>
+                  <p class="pack-desc">Single tactical 250ml aluminum can for trial or solo deployment.</p>
+                </div>
+                <div class="pack-pricing">
+                  <span class="pack-price">$1.99</span>
+                  <span class="pack-per">/ unit</span>
+                </div>
+              </div>
+
+              <!-- 6-Pack Starter -->
+              <div class="pack-option-card" data-pack="6-pack" data-price="9.99" data-name="6-Pack Starter Box">
+                <div class="pack-radio">
+                  <div class="radio-circle"></div>
+                </div>
+                <div class="pack-details">
+                  <div class="pack-name-row">
+                    <span class="pack-title">6-Pack Starter Box</span>
+                    <span class="pack-tag">POPULAR</span>
+                  </div>
+                  <p class="pack-desc">Six ice-shielded cans in a compact tactical carton. Ideal for sprint weeks.</p>
+                </div>
+                <div class="pack-pricing">
+                  <span class="pack-price">$9.99</span>
+                  <span class="pack-per">$1.66 / can</span>
+                </div>
+              </div>
+
+              <!-- 24-Can Party Tray (Active Default) -->
+              <div class="pack-option-card active-pack" data-pack="24-pack" data-price="29.99" data-name="24-Can Party Tray">
+                <div class="best-value-ribbon">BEST VALUE // SAVE 20%</div>
+                <div class="pack-radio">
+                  <div class="radio-circle active"></div>
+                </div>
+                <div class="pack-details">
+                  <div class="pack-name-row">
+                    <span class="pack-title">24-Can Party Tray</span>
+                    <span class="pack-tag highlight">OPERATOR GRADE</span>
+                  </div>
+                  <p class="pack-desc">Full 24-can heavy-duty armored tray. Maximum price per ml value.</p>
+                </div>
+                <div class="pack-pricing">
+                  <span class="pack-price accent">$29.99</span>
+                  <span class="pack-per">$1.25 / can</span>
+                </div>
+              </div>
+
+              <!-- 48-Can Armory Case -->
+              <div class="pack-option-card" data-pack="48-pack" data-price="54.99" data-name="48-Can Armory Case">
+                <div class="pack-radio">
+                  <div class="radio-circle"></div>
+                </div>
+                <div class="pack-details">
+                  <div class="pack-name-row">
+                    <span class="pack-title">48-Can Armory Case</span>
+                    <span class="pack-tag">SQUAD RE-SUPPLY</span>
+                  </div>
+                  <p class="pack-desc">Double tray dual-tier armored case for esports facilities, gyms, and squad headquarters.</p>
+                </div>
+                <div class="pack-pricing">
+                  <span class="pack-price">$54.99</span>
+                  <span class="pack-per">$1.14 / can</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Crate Telemetry HUD Checkout Box -->
+            <div class="crate-summary-column">
+              <div class="crate-summary-hud">
+                <div class="hud-box-header">
+                  <span class="hud-box-title">CRATE TELEMETRY</span>
+                  <span class="live-tag">LIVE MANIFEST</span>
+                </div>
+
+                <div class="active-pack-summary">
+                  <h4 id="summaryPackName">24-Can Party Tray</h4>
+                  <p class="manifest-desc">24x 250ml Classic Thermal-Shield Cans</p>
+                </div>
+
+                <!-- Quantity Adjuster -->
+                <div class="quantity-controller">
+                  <span class="qty-label">CRATE UNITS:</span>
+                  <div class="stepper-box">
+                    <button class="step-btn" id="qtyMinusBtn" type="button">-</button>
+                    <span class="qty-display" id="qtyDisplay">1</span>
+                    <button class="step-btn" id="qtyPlusBtn" type="button">+</button>
+                  </div>
+                </div>
+
+                <!-- Included Benefits -->
+                <div class="manifest-checklist">
+                  <div class="check-item">
+                    <span class="material-symbols-outlined">check</span>
+                    <span>24x Ultra-Purified Caffeine Classic Formula</span>
+                  </div>
+                  <div class="check-item">
+                    <span class="material-symbols-outlined">check</span>
+                    <span>HELL Energy Holographic Decal Sticker Set</span>
+                  </div>
+                  <div class="check-item">
+                    <span class="material-symbols-outlined">check</span>
+                    <span>Insulated Express Thermal Delivery</span>
+                  </div>
+                </div>
+
+                <div class="hud-pricing-breakdown">
+                  <div class="price-row">
+                    <span>Base Manifest Subtotal:</span>
+                    <span id="summaryBasePrice">$36.99</span>
+                  </div>
+                  <div class="price-row highlight-discount">
+                    <span>Tactical Bundle Discount:</span>
+                    <span id="summaryDiscount">-$7.00 (20%)</span>
+                  </div>
+                  <div class="price-row total-row">
+                    <span>Final Checkout Price:</span>
+                    <span class="final-total" id="summaryFinalPrice">$29.99</span>
+                  </div>
+                </div>
+
+                <button class="cta-primary-btn checkout-btn" id="crateCheckoutBtn" type="button">
+                  <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                  <span>ADD TO CRATE &amp; CHECKOUT</span>
+                </button>
+
+                <div class="guarantee-line">
+                  <span class="material-symbols-outlined">verified_user</span>
+                  <span>100% TASTE &amp; POWER SATISFACTION GUARANTEED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT / HALL OF FIENDS SECTION (Preserving #aboutSection) -->
+        <section id="aboutSection" class="section-container reviews-section">
+          <div class="section-header-block">
+            <div class="section-tag">
+              <span class="material-symbols-outlined">stars</span>
+              <span>VERIFIED OPERATIVE FEEDBACK</span>
+            </div>
+            <div class="title-with-rating-row">
+              <h2 class="section-title">HALL OF FIENDS</h2>
+              <div class="overall-rating-pill">
+                <span class="stars">★★★★★</span>
+                <span class="score">4.9 / 5.0</span>
+                <span class="deployments">OVER 12,480+ DEPLOYMENTS</span>
+              </div>
+            </div>
+            <p class="section-subtitle">
+              Authentic field reports from competitive esports pros, heavy athletes, and night-shift powerhouses.
+            </p>
+          </div>
+
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <h4 class="review-headline">"Zero crash down and focus without the jitters!"</h4>
+              <p class="review-quote">
+                "As an Apex Predator grinder, I need 6+ hours of pinpoint optic focus. Other energy drinks give me shaking fingers and sudden crashes. HELL Classic keeps me steady and dialled in."
+              </p>
+              <div class="reviewer-meta">
+                <div class="reviewer-avatar">MR</div>
+                <div>
+                  <div class="reviewer-name">Marcus R.</div>
+                  <div class="reviewer-badge">ESPORTS PRO // APEX PREDATOR</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <h4 class="review-headline">"Tastes superior to every 16oz can on the market."</h4>
+              <p class="review-quote">
+                "The Tutti-Frutti punch is crisp, tart, and not overwhelmingly syrupy. 32mg per 100ml gives me the exact thrust I need before heavy deadlift PR sessions."
+              </p>
+              <div class="reviewer-meta">
+                <div class="reviewer-avatar">EK</div>
+                <div>
+                  <div class="reviewer-name">Elena K.</div>
+                  <div class="reviewer-badge">CROSSFIT ATHLETE &amp; TRAINER</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <h4 class="review-headline">"Saves my night shifts every single time."</h4>
+              <p class="review-quote">
+                "Managing flight control telemetry during 12-hour midnight shifts requires 100% alertness. One chilled can of HELL Energy keeps my cognitive response laser sharp."
+              </p>
+              <div class="reviewer-meta">
+                <div class="reviewer-avatar">DM</div>
+                <div>
+                  <div class="reviewer-name">David M.</div>
+                  <div class="reviewer-badge">FLIGHT SYSTEMS SPECIALIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT SECTION (Preserving #contactSection) -->
+        <section id="contactSection" class="section-container contact-section">
+          <div class="contact-box">
+            <div class="contact-text-col">
+              <div class="section-tag">
+                <span class="material-symbols-outlined">satellite_alt</span>
+                <span>COMMS &amp; DISPATCH</span>
+              </div>
+              <h2 class="contact-title">JOIN THE HELL CADRE</h2>
+              <p class="contact-desc">
+                Subscribe for private crate drops, athlete telemetry leaks, esports sponsorships, and exclusive discounts.
+              </p>
+            </div>
+
+            <div class="contact-form-col">
+              <div class="tactical-input-group">
+                <input type="email" id="newsletterEmail" placeholder="Enter operative email address..." />
+                <button type="button" id="subscribeBtn" class="cta-primary-btn">
+                  <span>SUBSCRIBE</span>
+                  <span class="material-symbols-outlined">send</span>
+                </button>
+              </div>
+              <span class="comms-disclaimer">Zero spam policy. Unsubscribe at any time through telemetry dashboard.</span>
+            </div>
+          </div>
+
+          <!-- Footer telemetry links -->
+          <footer class="site-footer">
+            <div class="footer-top">
+              <div class="footer-brand">
+                <span class="material-symbols-outlined brand-devil">local_fire_department</span>
+                <span class="brand-text">HELL <span class="accent-red">ENERGY</span></span>
+              </div>
+              <div class="footer-links">
+                <a href="#homeSection">ENERGY DRINKS</a>
+                <a href="#powerMatrixSection">LAB TELEMETRY</a>
+                <a href="#crateSection">CRATE BUILDER</a>
+                <a href="#servicesSection">COMBAT ZONES</a>
+                <a href="#aboutSection">REVIEWS</a>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <p>&copy; 2026 HELL ENERGY GLOBAL. ALL RIGHTS RESERVED. POWERED BY DIRECT TELEMETRY.</p>
+              <p class="footer-disclaimer">Not recommended for children, pregnant women, or caffeine-sensitive operatives.</p>
+            </div>
+          </footer>
+        </section>
+      </main>
+
+      <!-- MOBILE DOCKED BOTTOM CONVERSION BAR matching Stitch mobile -->
+      <div class="mobile-bottom-bar" id="mobileBottomBar">
+        <div class="mobile-bar-price">
+          <span class="m-label">24-CAN TRAY:</span>
+          <span class="m-price" id="mobileBarPrice">$29.99</span>
+        </div>
+        <button class="cta-primary-btn m-crate-btn" id="mobileAddCrateBtn" type="button">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          <span>ADD TO CRATE</span>
+        </button>
+      </div>
+
+      <!-- DETAILS FORM MODAL (Preserving #overlay, #detailsForm, and all inputs/spans/buttons) -->
+      <div id="overlay"></div>
+
+      <div id="detailsForm" class="details-form-modal">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="material-symbols-outlined modal-icon">assignment_ind</span>
+            <div>
+              <h3 class="modal-title">OPERATIVE PROFILE REGISTRATION</h3>
+              <p class="modal-subtitle">Direct Telemetry Delivery &amp; Crate Dispatch Manifest</p>
+            </div>
+          </div>
+          <button type="button" class="modal-close-btn" id="closeDetailsModal" title="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">FULL OPERATIVE NAME *</label>
+            <div class="field-container">
+              <span class="material-symbols-outlined">person</span>
+              <input type="text" id="name" placeholder="E.g. Divyansh Sharma" />
+            </div>
+            <span id="nameError" class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">TACTICAL CONTACT NUMBER *</label>
+            <div class="field-container">
+              <span class="material-symbols-outlined">call</span>
+              <input type="tel" id="phone" placeholder="E.g. +91 9876543210" />
+            </div>
+            <span id="phoneError" class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="address">DELIVERY HEADQUARTERS ADDRESS *</label>
+            <div class="field-container">
+              <span class="material-symbols-outlined textarea-icon">pin_drop</span>
+              <textarea id="address" placeholder="Enter street, apartment/building, and sector..."></textarea>
+            </div>
+            <span id="addressError" class="field-error"></span>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="city">CITY / ZONE *</label>
+              <div class="field-container">
+                <span class="material-symbols-outlined">location_city</span>
+                <input type="text" id="city" placeholder="E.g. New Delhi" />
+              </div>
+              <span id="cityError" class="field-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="pincode">POSTAL PIN CODE *</label>
+              <div class="field-container">
+                <span class="material-symbols-outlined">numbers</span>
+                <input type="text" id="pincode" placeholder="E.g. 110001" />
+              </div>
+              <span id="pincodeError" class="field-error"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="cta-secondary-btn cancel-btn" id="cancelDetailsBtn">
+            <span>CANCEL</span>
+          </button>
+          <button id="submitDetails" type="button" class="cta-primary-btn submit-modal-btn">
+            <span class="material-symbols-outlined">verified</span>
+            <span>SUBMIT TELEMETRY DETAILS</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPUP NOTIFICATION (Preserving #popup) -->
+    <div id="popup" class="popup"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
